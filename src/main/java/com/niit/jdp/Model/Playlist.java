@@ -6,5 +6,5 @@
 
 package com.niit.jdp.Model;
 
-public class PlaylistModel {
+public class Playlist {
 }
