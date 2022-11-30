@@ -4,7 +4,7 @@
  * Created With : IntelliJ IDEA Community Edition
  */
 
-package com.niit.jdp.Service;
+package com.niit.jdp.model;
 
-public class MusicPlayer {
+public class User {
 }

@@ -4,7 +4,7 @@
  * Created With : IntelliJ IDEA Community Edition
  */
 
-package com.niit.jdp.Repository;
+package com.niit.jdp.model;
 
-public class PlaylistRepository {
+public class Song {
 }

@@ -4,7 +4,7 @@
  * Created With : IntelliJ IDEA Community Edition
  */
 
-package com.niit.jdp.Repository;
+package com.niit.jdp.service;
 
-public class UserRepository {
+public class DatabaseConnectionService {
 }
