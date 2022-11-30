@@ -6,5 +6,5 @@
 
 package com.niit.jdp.service;
 
-public class MusicPlayer {
+public class MusicPlayerService {
 }
