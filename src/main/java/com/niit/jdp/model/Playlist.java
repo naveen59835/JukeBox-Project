@@ -12,14 +12,16 @@ public class Playlist {
     int playlistId;
     String playlistName;
     int songId;
+    String songName;
 
-    public Playlist(int playlistId, String playlistName, int songId) {
+    public Playlist() {
+    }
+
+    public Playlist(int playlistId, String playlistName, int songId, String songName) {
         this.playlistId = playlistId;
         this.playlistName = playlistName;
         this.songId = songId;
-    }
-
-    public Playlist() {
+        this.songName = songName;
     }
 
     public int getPlaylistId() {
@@ -46,13 +48,12 @@ public class Playlist {
         this.songId = songId;
     }
 
-    @Override
-    public String toString() {
-        return "Playlist{" +
-                "playlistId=" + playlistId +
-                ", playlistName='" + playlistName + '\'' +
-                ", songId=" + songId +
-                '}';
+    public String getSongName() {
+        return songName;
+    }
+
+    public void setSongName(String songName) {
+        this.songName = songName;
     }
 
     @Override
@@ -60,11 +61,21 @@ public class Playlist {
         if (this == o) return true;
         if (!(o instanceof Playlist)) return false;
         Playlist playlist = (Playlist) o;
-        return getPlaylistId() == playlist.getPlaylistId() && getSongId() == playlist.getSongId() && Objects.equals(getPlaylistName(), playlist.getPlaylistName());
+        return getPlaylistId() == playlist.getPlaylistId() && getSongId() == playlist.getSongId() && Objects.equals(getPlaylistName(), playlist.getPlaylistName()) && Objects.equals(getSongName(), playlist.getSongName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId());
+        return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId(), getSongName());
+    }
+
+    @Override
+    public String toString() {
+        return "Playlist{" +
+                "playlistId=" + playlistId +
+                ", playlistName='" + playlistName + '\'' +
+                ", songId=" + songId +
+                ", songName='" + songName + '\'' +
+                '}';
     }
 }
