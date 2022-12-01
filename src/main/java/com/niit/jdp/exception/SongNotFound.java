@@ -6,8 +6,6 @@
 
 package com.niit.jdp.exception;
 
-public class PlaylistNotFound  extends Exception{
-    public PlaylistNotFound(String message){
-        super(message);
-    }
+public class SongNotFound {
+
 }
