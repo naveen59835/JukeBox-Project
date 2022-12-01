@@ -36,3 +36,13 @@ insert into jukebox.playlist value(12,'pop playlist',1);
 insert into jukebox.playlist value(13,'pop playlist',2);
 insert into jukebox.playlist value(14,'fusion playlist',3);
 insert into jukebox.playlist value(15,'fusion playlist',4);
+
+--insert values in the user table
+insert into jukebox.user value('bob',123);
+insert into jukebox.user value('smith',123);
+insert into jukebox.user value('charles',123);
+--made song id in song table as primary key
+ALTER TABLE `jukebox`.`song`
+CHANGE COLUMN `songId` `songId` INT NOT NULL ,
+ADD PRIMARY KEY (`songId`);
+;
