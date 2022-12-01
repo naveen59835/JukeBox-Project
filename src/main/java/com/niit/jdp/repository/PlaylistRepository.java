@@ -88,14 +88,14 @@ public class PlaylistRepository {
         }
         return getSongFromList;
     }
-    public void insertSongIntoList(int playlistId,String playlistName,int songId,String songName){
-        String insertQuery="insert into `jukebox`.`playlist`(`playlistId`,`playlistName`,`songId`,`songName`)"+"values(?, ?, ?);";
+    public void insertSongIntoList(int playlistId,int songId){
+        String insertQuery="insert into `jukebox`.`playlist`(`playlistId`,`songId`)"+"values(?, ?);";
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(insertQuery);
             preparedStatement.setInt(1,playlistId);
-            preparedStatement.setString(2,playlistName);
+
             preparedStatement.setInt(3,songId);
-            preparedStatement.setString(4,songName);
+
             int prepare= preparedStatement.executeUpdate();
             if(prepare==1){
                 System.out.println("song successfully added to the playlist");
