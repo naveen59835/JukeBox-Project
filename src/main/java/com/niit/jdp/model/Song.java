@@ -18,7 +18,7 @@ public class Song {
     public Song() {
     }
 
-    public Song(int songId, String songName, String artistName, String genre, String duration, String songPath) {
+    public Song(int songId, String songName, String artistName, String genre, String duration) {
         this.songId = songId;
         this.songName = songName;
         this.artistName = artistName;
@@ -71,12 +71,22 @@ public class Song {
         if (this == o) return true;
         if (!(o instanceof Song)) return false;
         Song song = (Song) o;
-        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getArtistName(), song.getArtistName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getDuration(), song.getDuration()) && Objects.equals(getSongPath(), song.getSongPath());
+        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getArtistName(), song.getArtistName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getDuration(), song.getDuration());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSongId(), getSongName(), getArtistName(), getGenre(), getDuration(), getSongPath());
+        return Objects.hash(getSongId(), getSongName(), getArtistName(), getGenre(), getDuration());
     }
 
+    @Override
+    public String toString() {
+        return "Song{" +
+                "songId=" + songId +
+                ", songName='" + songName + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", genre='" + genre + '\'' +
+                ", duration='" + duration + '\'' +
+                '}';
+    }
 }
