@@ -51,3 +51,7 @@ ALTER TABLE `jukebox`.`playlist`
 CHANGE COLUMN `playlistId` `playlistId` INT NOT NULL ,
 ADD PRIMARY KEY (`playlistId`);
 ;
+--Alter table and added song path to it
+ALTER TABLE `jukebox`.`song`
+ADD COLUMN `songPath` VARCHAR(45) NULL AFTER `duration`;
+

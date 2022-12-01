@@ -14,16 +14,18 @@ public class Song {
     private String artistName;
     private String genre;
     private String duration;
+    private String songPath;
 
     public Song() {
     }
 
-    public Song(int songId, String songName, String artistName, String genre, String duration) {
+    public Song(int songId, String songName, String artistName, String genre, String duration, String songPath) {
         this.songId = songId;
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
         this.duration = duration;
+        this.songPath = songPath;
     }
 
     public int getSongId() {
@@ -66,17 +68,25 @@ public class Song {
         this.duration = duration;
     }
 
+    public String getSongPath() {
+        return songPath;
+    }
+
+    public void setSongPath(String songPath) {
+        this.songPath = songPath;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Song)) return false;
         Song song = (Song) o;
-        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getArtistName(), song.getArtistName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getDuration(), song.getDuration());
+        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getArtistName(), song.getArtistName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getDuration(), song.getDuration()) && Objects.equals(getSongPath(), song.getSongPath());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSongId(), getSongName(), getArtistName(), getGenre(), getDuration());
+        return Objects.hash(getSongId(), getSongName(), getArtistName(), getGenre(), getDuration(), getSongPath());
     }
 
     @Override
@@ -87,7 +97,7 @@ public class Song {
                 ", artistName='" + artistName + '\'' +
                 ", genre='" + genre + '\'' +
                 ", duration='" + duration + '\'' +
+                ", songPath='" + songPath + '\'' +
                 '}';
     }
-
 }
