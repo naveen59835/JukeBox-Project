@@ -66,3 +66,4 @@ update `jukebox`.`playlist` set `songName`='rolex' where `songid`=4;
 -- changed column size of song varchar to 100
 ALTER TABLE `jukebox`.`song`
 CHANGE COLUMN `songPath` `songPath` VARCHAR(100) NULL DEFAULT NULL ;
+--created column of songpath in song table and added path of the song to it
