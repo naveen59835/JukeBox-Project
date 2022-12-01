@@ -67,3 +67,18 @@ update `jukebox`.`playlist` set `songName`='rolex' where `songid`=4;
 ALTER TABLE `jukebox`.`song`
 CHANGE COLUMN `songPath` `songPath` VARCHAR(100) NULL DEFAULT NULL ;
 --created column of songpath in song table and added path of the song to it
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/adiye_azhage.wav' where `songid`=1;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/minsarakanavu.wav' where `songid`=2;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/naan.wav' where `songid`=3;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/Pirates of the Caribbean.wav' where `songid`=4;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/rolex-58120.wav' where `songid`=5;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/rolex-bgm.wav' where `songid`=6;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/vaarnam_aairam_bgm.wav' where `songid`=7;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/vikram_vedha.wav' where `songid`=8;
+update `jukebox`.`song` set `songpath`='src/main/resources/SongsFolder/yanji.wav' where `songid`=9;
+--updated song list and playlist name in the playlist table
+update `jukebox`.`playlist` set `songName`='adiye_azhage' where `songid`=1;
+update `jukebox`.`playlist` set `songName`='minsara' where `songid`=2;
+update `jukebox`.`playlist` set `songName`='naan' where `songid`=3;
+update `jukebox`.`playlist` set `songName`='pirates' where `songid`=4;
+update `jukebox`.`playlist` set `songName`='rolex1' where `songid`=5;
