@@ -21,7 +21,7 @@ create table `jukebox`.`user`(
 userId varchar(50),
 password varchar(50)
 );
--- inserted values in the song taable
+-- inserted values in the song table
 insert into jukebox.song value(1,'adiye_azhage','Beiber','pop','6 mins');
 insert into jukebox.song value(2,'minsara','gomez','pop','2 mins');
 insert into jukebox.song value(3,'naan','shakira','treble','3 mins');
@@ -63,3 +63,6 @@ update `jukebox`.`playlist` set `songName`='varanam' where `songid`=1;
 update `jukebox`.`playlist` set `songName`='naan' where `songid`=2;
 update `jukebox`.`playlist` set `songName`='yanji' where `songid`=3;
 update `jukebox`.`playlist` set `songName`='rolex' where `songid`=4;
+--sample
+--d:\\
+--C:\\Users\\navee\\IdeaProjects\capstone-project-jukebox\src\main\resources\SongsFolder\adiye_azhage.wav
