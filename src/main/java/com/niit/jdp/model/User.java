@@ -7,7 +7,7 @@
 package com.niit.jdp.model;
 
 public class User {
-    String userId;
-    String password;
+    private String userId;
+    private String password;
 
 }
