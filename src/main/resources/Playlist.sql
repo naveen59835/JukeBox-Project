@@ -55,3 +55,11 @@ ADD PRIMARY KEY (`playlistId`);
 ALTER TABLE `jukebox`.`song`
 ADD COLUMN `songPath` VARCHAR(45) NULL AFTER `duration`;
 
+--Added column to the jukebox database
+ALTER TABLE `jukebox`.`playlist`
+ADD COLUMN `songName` VARCHAR(45) NULL AFTER `songId`;
+-- added values to the column
+update `jukebox`.`playlist` set `songName`='varanam' where `songid`=1;
+update `jukebox`.`playlist` set `songName`='naan' where `songid`=2;
+update `jukebox`.`playlist` set `songName`='yanji' where `songid`=3;
+update `jukebox`.`playlist` set `songName`='rolex' where `songid`=4;
