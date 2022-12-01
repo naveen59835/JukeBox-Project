@@ -16,8 +16,9 @@ import java.util.List;
 public class PlaylistRepository implements Repository {
     Connection connection;
     DatabaseConnectionService databaseConnectionService;
-    public PlaylistRepository (){
+    public PlaylistRepository () throws SQLException, ClassNotFoundException {
         databaseConnectionService=new DatabaseConnectionService();
+        connection=databaseConnectionService.getConnectionToDatabase();
 
     }
 
