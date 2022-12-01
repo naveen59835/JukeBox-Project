@@ -21,20 +21,25 @@ public class PlaylistRepository implements Repository {
         connection=databaseConnectionService.getConnectionToDatabase();
 
     }
+    public boolean createPlaylist(int playlistId,String playlistName,int songId){
+        String insertQuery="Insert into`jukebox`.`playlist`(playlistId,playlistName,songId) Values=(? ? ?);";
+
+    }
 
 
     @Override
-    public List<Playlist> getAll(Connection connection) throws SQLException {
+    public List<Playlist> getAll() throws SQLException {
+
         return null;
     }
 
     @Override
-    public Playlist getBySongId(Connection connection, int songId) throws SQLException {
+    public Playlist getBySongId(int songId) throws SQLException {
         return null;
     }
 
     @Override
-    public boolean deleteBySongId(Connection connection, int songId) throws SQLException {
+    public boolean deleteBySongId(int songId) throws SQLException {
         return false;
     }
 }
