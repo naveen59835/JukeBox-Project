@@ -63,6 +63,6 @@ update `jukebox`.`playlist` set `songName`='varanam' where `songid`=1;
 update `jukebox`.`playlist` set `songName`='naan' where `songid`=2;
 update `jukebox`.`playlist` set `songName`='yanji' where `songid`=3;
 update `jukebox`.`playlist` set `songName`='rolex' where `songid`=4;
---sample
---d:\\
---C:\\Users\\navee\\IdeaProjects\capstone-project-jukebox\src\main\resources\SongsFolder\adiye_azhage.wav
+-- changed column size of song varchar to 100
+ALTER TABLE `jukebox`.`song`
+CHANGE COLUMN `songPath` `songPath` VARCHAR(100) NULL DEFAULT NULL ;
