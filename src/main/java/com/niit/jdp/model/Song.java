@@ -14,7 +14,6 @@ public class Song {
     private String artistName;
     private String genre;
     private String duration;
-    private String songPath;
 
     public Song() {
     }
@@ -25,7 +24,6 @@ public class Song {
         this.artistName = artistName;
         this.genre = genre;
         this.duration = duration;
-        this.songPath = songPath;
     }
 
     public int getSongId() {
@@ -68,14 +66,6 @@ public class Song {
         this.duration = duration;
     }
 
-    public String getSongPath() {
-        return songPath;
-    }
-
-    public void setSongPath(String songPath) {
-        this.songPath = songPath;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,15 +79,4 @@ public class Song {
         return Objects.hash(getSongId(), getSongName(), getArtistName(), getGenre(), getDuration(), getSongPath());
     }
 
-    @Override
-    public String toString() {
-        return "Song{" +
-                "songId=" + songId +
-                ", songName='" + songName + '\'' +
-                ", artistName='" + artistName + '\'' +
-                ", genre='" + genre + '\'' +
-                ", duration='" + duration + '\'' +
-                ", songPath='" + songPath + '\'' +
-                '}';
-    }
 }
