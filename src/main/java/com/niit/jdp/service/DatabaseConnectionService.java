@@ -6,5 +6,31 @@
 
 package com.niit.jdp.service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class DatabaseConnectionService {
+    private static final String URL="jdbc:mysql://localhost:3306/jukebox";
+    private static final String USER="root";
+    private static final String PASS="585858";
+    Connection connection;
+    public  DatabaseConnectionService(){
+        connection=null;
+    }
+    public void getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        connection= DriverManager.getConnection(URL,USER,PASS);
+    }
+    public Connection getConnectionToDatabase() throws SQLException, ClassNotFoundException {
+        getConnection();
+        return connection;
+    }
+    public void printConnectionStatus(){
+        if(connection!=null){
+            System.out.println("Connection is Successful");
+        }else{
+            System.out.println("Connection failed");
+        }
+    }
 }
