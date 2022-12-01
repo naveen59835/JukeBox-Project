@@ -46,3 +46,8 @@ ALTER TABLE `jukebox`.`song`
 CHANGE COLUMN `songId` `songId` INT NOT NULL ,
 ADD PRIMARY KEY (`songId`);
 ;
+--made playlist id in the playlist table as primary key
+ALTER TABLE `jukebox`.`playlist`
+CHANGE COLUMN `playlistId` `playlistId` INT NOT NULL ,
+ADD PRIMARY KEY (`playlistId`);
+;
