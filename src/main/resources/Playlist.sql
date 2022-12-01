@@ -82,3 +82,8 @@ update `jukebox`.`playlist` set `songName`='minsara' where `songid`=2;
 update `jukebox`.`playlist` set `songName`='naan' where `songid`=3;
 update `jukebox`.`playlist` set `songName`='pirates' where `songid`=4;
 update `jukebox`.`playlist` set `songName`='rolex1' where `songid`=5;
+--added values to the playlist table
+insert into jukebox.playlist value(17,'ArtistPlaylist',6,'rolex2');
+insert into jukebox.playlist value(18,'on Repeat playlist',7,'varanam');
+insert into jukebox.playlist value(19,'spot playlist',8,'vikramvedha');
+insert into jukebox.playlist value(20,'discover playlist',9,'yanji');
