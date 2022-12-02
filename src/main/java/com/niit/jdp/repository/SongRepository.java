@@ -10,10 +10,7 @@ import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,23 +24,23 @@ public class SongRepository implements Repository {
 
     }
     @Override
-    public List<Song> displayPlaylist() throws SongNotFound {
+    public List<Song> displaySongList() throws SongNotFound {
         List<Song> songList=new ArrayList<>();
-        String displayQuery="Select*from `jukebox`.`song`;";
-        try {
-            PreparedStatement preparedStatement= connection.prepareStatement(displayQuery);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            while (resultSet.next());
-            int songId=resultSet.getInt(1);
-            String songName=resultSet.getString(2);
-            String artistName=resultSet.getString(3);
-            String genre=resultSet.getString(4);
-            String duration=resultSet.getString(5);
-            songList.add(new Song(songId,songName,artistName,genre,duration));
-
-
+        String displayQuery="Select * from `jukebox`.`song`;";
+        try (Statement statement= connection.createStatement();
+             ResultSet resultSet=statement.executeQuery(displayQuery)){
+            //resultSet.beforeFirst();
+            while (resultSet.next()) {
+                int songId = resultSet.getInt("songId");
+                String songName = resultSet.getString("songName");
+                String artistName = resultSet.getString("artistName");
+                String genre = resultSet.getString("genre");
+                String duration = resultSet.getString("duration");
+                String songPath=resultSet.getString("songPath");
+                songList.add(new Song(songId, songName, artistName, genre, duration,songPath));
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return songList;
@@ -72,13 +69,10 @@ public class SongRepository implements Repository {
         return songList2;
     }
     public void display(List<Song> songList){
-        System.out.println("SongID,Song Name,ArtistName,Genre,Duration");
-        for (Song song:songList){
-            System.out.println(song.getSongId());
-            System.out.println(song.getSongName());
-            System.out.println(song.getArtistName());
-            System.out.println(song.getGenre());
-            System.out.println(song.getDuration());
+        System.out.println("The details of the songs are");
+        for (Song song : songList) {
+            System.out.format("%-10d %-30s %-20s %-20s %-30s\n", song.getSongId(), song.getSongName(), song.getArtistName(), song.getDuration(), song.getGenre());
         }
+
     }
 }

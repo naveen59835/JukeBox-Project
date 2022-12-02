@@ -21,39 +21,42 @@ public class MusicPlayerService {
         Scanner scanner=new Scanner(System.in);
         try {
             DatabaseConnectionService databaseConnectionService=new DatabaseConnectionService();
-            Connection connection= databaseConnectionService.connection;
-            String playQuery="Select*from`jukebox`.`songs` where songId=?;";
+            Connection connection= databaseConnectionService.getConnectionToDatabase();
+            String playQuery="Select*from`jukebox`.`song` where songId=?;";
             PreparedStatement preparedStatement= connection.prepareStatement(playQuery);
             preparedStatement.setInt(1,songId);
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
-                File file=new File(resultSet.getString(1));
+                File file=new File(resultSet.getString("songPath"));
                 AudioInputStream audioInputStream= AudioSystem.getAudioInputStream(file);
                 Clip clip=AudioSystem.getClip();
                 clip.open(audioInputStream);
-                String response=" ";
-                while (response!="Z"){
-                    System.out.println("P for play,S for stop,E for End");
-                    response=scanner.next();
-                    switch (response){
-                        case ("P"):
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                String userInput=null;
+                while (userInput!="Z"){
+                    System.out.println(" ||1 for play ||2 for pause ||3 for resume ||4 for Close|| ");
+                    userInput=scanner.next();
+                    switch (userInput){
+                        case ("1"):
                             clip.start();
                             break;
-                        case ("S"):
+                        case ("2"):
                             clip.stop();
                             break;
-                        case ("E"):
-                            clip.stop();
+                        case("3"):
+                            clip.loop(1);
+                            break;
+                        case ("4"):
+                            clip.close();
                             break;
                         default:
-                            System.out.println("Incorrect Input");
-
-
-                        }
+                            System.out.println("Incorrect Input please try again");
                     }
-                }
+                    }
+            }
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
     }

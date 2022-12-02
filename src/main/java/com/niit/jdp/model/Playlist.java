@@ -8,7 +8,7 @@ package com.niit.jdp.model;
 
 import java.util.Objects;
 
-public class Playlist {
+public class Playlist extends Song {
     int playlistId;
     String playlistName;
     int songId;
@@ -68,6 +68,12 @@ public class Playlist {
     public int hashCode() {
         return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId(), getSongName());
     }
+
+//    @Override
+//    public String toString() {
+//        return String.format("%-10d %-30s %-20s %-10d",playlistId,playlistName,songId,songName);
+//    }
+
 
     @Override
     public String toString() {
