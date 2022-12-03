@@ -6,6 +6,7 @@
 
 package com.niit.jdp.repository;
 
+import com.niit.jdp.exception.PlaylistNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
@@ -26,7 +27,11 @@ public class PlaylistRepository {
 
     }
 
-    public void createPlaylist(int playlistId, String playlistName, int songId, String songName) {
+    public void createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
+        if(playlistName==null&&songId==0&&songName==null){
+            throw new PlaylistNotFound("Playlist not found");
+
+        }
         String insertQuery = "Insert into`jukebox`.`playlist`(playlistId,playlistName,songId,songName) Values (?, ?, ?,?);";
         int numberOfRowsAffected;
         try {
@@ -64,7 +69,10 @@ public class PlaylistRepository {
         }
         return playList;
     }
-    public List<Song> getSongFromList(int songId, List<Song> songList) {
+    public List<Song> getSongFromplaylist(int songId, List<Song> songList) throws PlaylistNotFound {
+        if(songId==0&&songList==null){
+            throw new PlaylistNotFound("Playlist not found");
+        }
         List<Song> getSong = new ArrayList<>();
         String query = "Select * from song where songId = " + songId;
 
@@ -90,8 +98,9 @@ public class PlaylistRepository {
     }
 
 
-    public void insertSongIntoList(int songId, String songName, String artistName, String genre, String duration, String songPath) {
-        String insertQuery = "insert into `jukebox`.`song`(`songId`,`songName`,`artistName`,`genre`,`duration`,`songPath`)" + "values(?,?,?,?,?,?);";
+    public void insertSongIntoplaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) {
+        String insertQuery = "insert into `jukebox`.`song`(`songId`,`songName`,`artistName`,`genre`,`duration`,`songPath`) values (?,?,?,?,?,?);";
+        int numberOfRowsAffected;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setInt(1, songId);
@@ -101,8 +110,8 @@ public class PlaylistRepository {
             preparedStatement.setString(5, duration);
             preparedStatement.setString(6, songPath);
 
-            int prepare = preparedStatement.executeUpdate();
-            if (prepare == 1) {
+            numberOfRowsAffected = preparedStatement.executeUpdate();
+            if (numberOfRowsAffected == 1) {
                 System.out.println("song successfully added to the playlist");
 
             } else {
@@ -113,20 +122,15 @@ public class PlaylistRepository {
         }
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound,NullPointerException{
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
         SongRepository songRepository=new SongRepository();
         PlaylistRepository playlistRepository=new PlaylistRepository();
         List<Song> displayplaylist = songRepository.displaySongList();
         songRepository.display(displayplaylist);
-
-  //      List<Song> getPlayListName = playlistRepository.displayPlaylist();
-//        for (Song playList : getPlayListName) {
-//            System.out.println(playList.getSongId() + " " + playList.getSongName());
-//        }
         Scanner scanner=new Scanner(System.in);
         System.out.println("Enter the id");
         int id=scanner.nextInt();
-        List<Song> getSongFromList = playlistRepository.getSongFromList(id, displayplaylist);
+        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
         songRepository.display(getSongFromList);
     }
     }

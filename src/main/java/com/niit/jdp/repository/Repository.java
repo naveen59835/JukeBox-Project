@@ -9,7 +9,7 @@ import java.util.List;
 public interface Repository {
     List<Song> displaySongList() throws SongNotFound, PlaylistNotFound;
 
-    List<Song> songSearchBySongName( List<Song> songList, String name);
+    List<Song> songSearchBySongName( List<Song> songList, String name) throws SongNotFound;
 
-    List<Song> songSearchByGenre(List<Song> songList, String genre);
+    List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound;
 }

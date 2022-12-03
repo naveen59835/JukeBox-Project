@@ -1,5 +1,6 @@
 package com.niit.jdp;
 
+import com.niit.jdp.exception.PlaylistNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.PlaylistRepository;
@@ -52,31 +53,41 @@ public class Main {
                     System.out.println();
                     switch (task) {
                         case 1:
-                            System.out.println("Press 1 to search song by Genre");
-                            System.out.println("Press 2 to search song by name");
+                            System.out.println("Press 1 to search song by genre and if play it");
                             int choice = scanner.nextInt();
+                            System.out.println("------------------------------------------------------------------------");
                             if (choice == 1) {
-                                System.out.println("Enter Genre name ::");
+                                System.out.println("Enter Genre");
                                 String genre = scanner.next();
-                                List<Song> getGenre1 = songRepository.songSearchByGenre(displayplaylist, genre);
-                                if (genre.equals(getGenre1)){
-                                    System.out.println("The genre is not there in the playlist");
-                                }else{
-                                    System.out.println("The genre is in the playlist");
+                                List<Song> getGenre = null;
+                                getGenre = songRepository.songSearchByGenre(displayplaylist, genre);
+                                songRepository.display(getGenre);
+                                System.out.println("If you want to play song then press (1/2)");
+                                String option = scanner.next();
+                                if (option.equals("1")) {
+                                    System.out.println("please enter the song id which you want play");
+                                    int id = scanner.nextInt();
+                                    musicPlayerService.playSong(id);
+                                    System.out.println();
+                                } else {
+                                    break;
                                 }
-
                             } else if (choice == 2) {
                                 System.out.println("Enter the song name");
                                 String getSong = scanner.next();
                                 List<Song> songList = songRepository.songSearchBySongName(displayplaylist, getSong);
-                                System.out.println("The specific song is the list "+getSong);
+                                if(getSong.equals("" )){
+                                    System.out.println("The Song is there in the list");
+                                }else {
+                                    System.out.println("The song is not in the list");
+                                }
                             }
                             break;
                         case 2:
                             songRepository.display(displayplaylist);
                             System.out.println("Enter the choice of Songs you want to play");
                             int choice1 = scanner.nextInt();
-                            musicPlayerService.getSongById(choice1);
+                            musicPlayerService.playSong(choice1);
                             break;
                         case 3:
                             System.out.println("Enter the playlist id you want to add");
@@ -102,7 +113,7 @@ public class Main {
                             String duration=scanner.next();
                             System.out.println("Enter the song path (Link)");
                             String link= scanner.next();
-                            playlistRepository.insertSongIntoList(songid1,songName,artist,genre,duration,link);
+                            playlistRepository.insertSongIntoplaylist(songid1,songName,artist,genre,duration,link);
                             break;
                         case 5:
                             List<Song> songList = playlistRepository.displayPlaylist();
@@ -111,13 +122,12 @@ public class Main {
                         case 6:
                             System.out.println("Enter the id");
                             int id=scanner.nextInt();
-                            List<Song> getSongFromList = playlistRepository.getSongFromList(id, displayplaylist);
+                            List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
                             songRepository.display(getSongFromList);
                             break;
-
-                        case 7:
-                            List<Song> songs12=songRepository.displaySongList();
-                            System.out.println(songs12);
+                            case 7:
+                            List<Song> songs=songRepository.displaySongList();
+                            System.out.println(songs);
                             break;
                         case 8:
                             System.out.println("Exited the application");
@@ -129,12 +139,8 @@ public class Main {
             } else {
                 System.out.println("Wrong user name or password please try again");
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException | SongNotFound | PlaylistNotFound e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException exception) {
-            throw new RuntimeException(exception);
-        } catch (SongNotFound exc) {
-            throw new RuntimeException(exc);
         }
 
 

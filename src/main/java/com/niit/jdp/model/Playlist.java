@@ -69,19 +69,11 @@ public class Playlist extends Song {
         return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId(), getSongName());
     }
 
-//    @Override
-//    public String toString() {
-//        return String.format("%-10d %-30s %-20s %-10d",playlistId,playlistName,songId,songName);
-//    }
-
-
     @Override
     public String toString() {
-        return "Playlist{" +
-                "playlistId=" + playlistId +
-                ", playlistName='" + playlistName + '\'' +
-                ", songId=" + songId +
-                ", songName='" + songName + '\'' +
-                '}';
+        return String.format("%-10s %-30s %-20s %-10s\n",playlistId,playlistName,songId,songName);
     }
+
+
+
 }

@@ -10,14 +10,13 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
-import java.io.NotActiveException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class MusicPlayerService {
-    public void getSongById(int songId){
+    public void playSong(int songId){
         Scanner scanner=new Scanner(System.in);
         try {
             DatabaseConnectionService databaseConnectionService=new DatabaseConnectionService();
@@ -32,27 +31,29 @@ public class MusicPlayerService {
                 Clip clip=AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
-                String userInput=null;
-                while (userInput!="Z"){
-                    System.out.println(" ||1 for play ||2 for pause ||3 for resume ||4 for Close|| ");
-                    userInput=scanner.next();
+                int userInput=0;
+                do{
+                    System.out.println(" ||1 for play ||2 for pause ||3 for resume ||0 for Close|| ");
+                    userInput=scanner.nextInt();
+                    scanner.nextLine();
                     switch (userInput){
-                        case ("1"):
+                        case (1):
                             clip.start();
                             break;
-                        case ("2"):
+                        case (2):
                             clip.stop();
                             break;
-                        case("3"):
+                        case(3):
                             clip.loop(1);
                             break;
-                        case ("4"):
+                        case (0):
                             clip.close();
+                            clip.stop();
                             break;
                         default:
                             System.out.println("Incorrect Input please try again");
                     }
-                    }
+                    }while (userInput>0);
             }
 
         } catch (Exception e) {
