@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         try {
             DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
@@ -38,9 +38,9 @@ public class Main {
             songRepository.display(displayplaylist);
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             if (username.equals("naveen") && password.equals("1234")) {
-                System.out.println("++++++++++++++++++++++++=======+++++++++++++++");
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Welcome to the JukeBox Music Player");
-                System.out.println("++++++++++++++++++++++++=======+++++++++++++++");
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 databaseConnectionService.getConnectionToDatabase();
                 databaseConnectionService.printConnectionStatus();
                 System.out.println();
@@ -69,7 +69,7 @@ public class Main {
                                 System.out.println("Enter the Genre");
                                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
                                 String genre = scanner.next();
-                                List<Song> getGenre =songRepository.songSearchByGenre(displayplaylist, genre);
+                                List<Song> getGenre = songRepository.songSearchByGenre(displayplaylist, genre);
                                 songRepository.display(getGenre);
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                 System.out.println("If you want to play any song please press 1 or press 2 to exit");
@@ -95,15 +95,15 @@ public class Main {
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                 System.out.println("If you want to play any song please press 1 or press 2 to exit");
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                String option=scanner.next();
-                                if(option.equals("1")){
+                                String option = scanner.next();
+                                if (option.equals("1")) {
                                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                     System.out.println("please enter the song id you want to play");
                                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                    int id=scanner.nextInt();
+                                    int id = scanner.nextInt();
                                     musicPlayerService.playSong(id);
                                     System.out.println();
-                                }else {
+                                } else {
                                     break;
                                 }
                             }
@@ -148,20 +148,20 @@ public class Main {
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the artist name");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            String artist= scanner.next();
+                            String artist = scanner.next();
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the genre");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            String genre=scanner.next();
+                            String genre = scanner.next();
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the duration");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            String duration=scanner.next();
+                            String duration = scanner.next();
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the song path (Link)");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            String link= scanner.next();
-                            playlistRepository.insertSongIntoplaylist(songid1,songName,artist,genre,duration,link);
+                            String link = scanner.next();
+                            playlistRepository.insertSongIntoplaylist(songid1, songName, artist, genre, duration, link);
                             break;
                         case 5:
                             List<Song> songList = playlistRepository.displayPlaylist();
@@ -171,12 +171,12 @@ public class Main {
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the id");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            int id=scanner.nextInt();
+                            int id = scanner.nextInt();
                             List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
                             songRepository.display(getSongFromList);
                             break;
-                            case 7:
-                            List<Song> songs=songRepository.displaySongList();
+                        case 7:
+                            List<Song> songs = songRepository.displaySongList();
                             System.out.println(songs);
                             break;
                         case 8:
@@ -186,8 +186,7 @@ public class Main {
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     }
 
-                }
-                while (task < 8);
+                } while (task < 8);
 
             } else {
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
