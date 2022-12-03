@@ -6,6 +6,8 @@
 
 package com.niit.jdp.service;
 
+import com.niit.jdp.exception.SongNotFound;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -16,17 +18,23 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class MusicPlayerService {
-    public void playSong(int songId){
-        Scanner scanner=new Scanner(System.in);
+    /**
+     * @param songId
+     */
+    public void playSong(int songId) throws SongNotFound {
+        if (songId == 0) {
+            throw new SongNotFound("song not found");
+        }
+        Scanner scanner = new Scanner(System.in);
         try {
-            DatabaseConnectionService databaseConnectionService=new DatabaseConnectionService();
-            Connection connection= databaseConnectionService.getConnectionToDatabase();
-            String playQuery="Select*from`jukebox`.`song` where songId=?;";
+            DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
+            Connection connection = databaseConnectionService.getConnectionToDatabase();
+            String playQuery = "Select*from`jukebox`.`song` where songId=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(playQuery);
-            preparedStatement.setInt(1,songId);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            while (resultSet.next()){
-                File file=new File(resultSet.getString("songPath"));
+            preparedStatement.setInt(1, songId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                File file = new File(resultSet.getString("songPath"));
                 AudioInputStream audioInputStream= AudioSystem.getAudioInputStream(file);
                 Clip clip=AudioSystem.getClip();
                 clip.open(audioInputStream);

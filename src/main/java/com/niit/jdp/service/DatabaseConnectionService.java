@@ -21,6 +21,7 @@ public class DatabaseConnectionService {
     }
 
     /**
+     * @return load the driver
      * @throws ClassNotFoundException
      * @throws SQLException
      */
@@ -30,7 +31,7 @@ public class DatabaseConnectionService {
     }
 
     /**
-     * @return
+     * @return connection
      * @throws SQLException
      * @throws ClassNotFoundException
      */
@@ -40,7 +41,7 @@ public class DatabaseConnectionService {
     }
 
     /**
-     *
+     * @return print connection status
      */
     public void printConnectionStatus() {
         if (connection != null) {

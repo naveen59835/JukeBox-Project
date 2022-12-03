@@ -21,13 +21,18 @@ public class PlaylistRepository {
     Connection connection;
     DatabaseConnectionService databaseConnectionService;
 
+    /**
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseConnectionService = new DatabaseConnectionService();
         connection = databaseConnectionService.getConnectionToDatabase();
     }
 
     /**
-     * @param args
+     * @param args main methods
+     * @return for checking the get song by id .I used the main method here
      * @throws SQLException
      * @throws ClassNotFoundException
      * @throws RuntimeException
@@ -49,12 +54,12 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param playlistId        -creating playlist id by getting it
-     * @param playlistName-     creating playlist name
-     * @param songId-creating   songid
-     * @param songName-creating songname
-     * @throws PlaylistNotFound-throws custom exception
-     * @return- if number of rows affected=1 then the playlist is created else not created
+     * @param playlistId   creating playlist id by getting it
+     * @param playlistName creating playlist name
+     * @param songId       creating songid
+     * @param songName     creating songname
+     * @return if number of rows affected=1 then the playlist is created else not created
+     * @throws PlaylistNotFound throws custom exception
      */
     public void createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
         if (playlistName == null && songId == 0 && songName == null) {
@@ -81,8 +86,7 @@ public class PlaylistRepository {
     }
 
     /**
-     * @return
-     * @param-
+     * @return displays playlist from the playlist table
      */
     public List<Song> displayPlaylist() {
         List<Song> playList = new ArrayList<>();
@@ -104,9 +108,9 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param songId
-     * @param songList
-     * @return
+     * @param songId get song by songid
+     * @param songList-from the song list
+     * @return return song details by using only songID
      * @throws PlaylistNotFound
      */
     public List<Song> getSongFromplaylist(int songId, List<Song> songList) throws PlaylistNotFound {
@@ -138,14 +142,19 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param songId
-     * @param songName
-     * @param artistName
-     * @param genre
-     * @param duration
-     * @param songPath
+     * @param songId     insert song by using song id
+     * @param songName   insert song by mnetioning song name
+     * @param artistName insert song by mentioning artistname
+     * @param genre      insert song using genre name
+     * @param duration   insert song using duration
+     * @param songPath   insert song path by mentioning durationb
+     * @return song successfully added if number of rows affected=1
+     * @throws PlaylistNotFound
      */
-    public void insertSongIntoplaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) {
+    public void insertSongIntoplaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) throws PlaylistNotFound {
+        if (songId == 0 && songName == null && artistName == null && genre == null && duration == null && songPath == null) {
+            throw new PlaylistNotFound("Playlist not found");
+        }
         String insertQuery = "insert into `jukebox`.`song`(`songId`,`songName`,`artistName`,`genre`,`duration`,`songPath`) values (?,?,?,?,?,?);";
         int numberOfRowsAffected;
         try {
