@@ -28,9 +28,13 @@ public class DatabaseConnectionService {
     }
     public void printConnectionStatus(){
         if(connection!=null){
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Connection is Successful");
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }else{
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Connection failed");
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }
     }
 }

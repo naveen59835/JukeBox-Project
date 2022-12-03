@@ -22,7 +22,7 @@ public class MusicPlayerService {
             DatabaseConnectionService databaseConnectionService=new DatabaseConnectionService();
             Connection connection= databaseConnectionService.getConnectionToDatabase();
             String playQuery="Select*from`jukebox`.`song` where songId=?;";
-            PreparedStatement preparedStatement= connection.prepareStatement(playQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(playQuery);
             preparedStatement.setInt(1,songId);
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -33,9 +33,9 @@ public class MusicPlayerService {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 int userInput=0;
                 do{
-                    System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-                    System.out.println("press 1 for start|| 2 for pause ||3 for resume||4 for close music player");
-                    System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("press 1 to start|| 2 to pause ||3 to resume||0 to close music player");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     userInput=scanner.nextInt();
                     scanner.nextLine();
                     switch (userInput){
@@ -53,7 +53,9 @@ public class MusicPlayerService {
                             clip.stop();
                             break;
                         default:
+                            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Incorrect Input please try again");
+                            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     }
                     }while (userInput>0);
             }
