@@ -19,7 +19,9 @@ import java.util.Scanner;
 
 public class MusicPlayerService {
     /**
-     * @param songId
+     * @param songId plays the song by getting a input as songID
+     * @return plays a song pause,resume and exit the song application
+     * @throws SongNotFound
      */
     public void playSong(int songId) throws SongNotFound {
         if (songId == 0) {
