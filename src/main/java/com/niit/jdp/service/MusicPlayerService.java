@@ -33,7 +33,9 @@ public class MusicPlayerService {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 int userInput=0;
                 do{
-                    System.out.println(" ||1 for play ||2 for pause ||3 for resume ||0 for Close|| ");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("press 1 for start|| 2 for pause ||3 for resume||4 for close music player");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++");
                     userInput=scanner.nextInt();
                     scanner.nextLine();
                     switch (userInput){
