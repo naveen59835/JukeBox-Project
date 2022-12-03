@@ -11,27 +11,43 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnectionService {
-    private static final String URL="jdbc:mysql://localhost:3306/jukebox";
-    private static final String USER="root";
-    private static final String PASS="585858";
+    private static final String URL = "jdbc:mysql://localhost:3306/jukebox";
+    private static final String USER = "root";
+    private static final String PASS = "585858";
     Connection connection;
-    public  DatabaseConnectionService(){
-        connection=null;
+
+    public DatabaseConnectionService() {
+        connection = null;
     }
+
+    /**
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public void getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection= DriverManager.getConnection(URL,USER,PASS);
+        connection = DriverManager.getConnection(URL, USER, PASS);
     }
+
+    /**
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public Connection getConnectionToDatabase() throws SQLException, ClassNotFoundException {
         getConnection();
         return connection;
     }
-    public void printConnectionStatus(){
-        if(connection!=null){
+
+    /**
+     *
+     */
+    public void printConnectionStatus() {
+        if (connection != null) {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Connection is Successful");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        }else{
+        } else {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Connection failed");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");

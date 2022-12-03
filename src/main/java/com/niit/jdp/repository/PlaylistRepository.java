@@ -24,13 +24,40 @@ public class PlaylistRepository {
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseConnectionService = new DatabaseConnectionService();
         connection = databaseConnectionService.getConnectionToDatabase();
-
     }
 
+    /**
+     * @param args
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws RuntimeException
+     * @throws SongNotFound
+     * @throws NullPointerException
+     * @throws PlaylistNotFound
+     */
 
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
+        SongRepository songRepository = new SongRepository();
+        PlaylistRepository playlistRepository = new PlaylistRepository();
+        List<Song> displayplaylist = songRepository.displaySongList();
+        songRepository.display(displayplaylist);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the id");
+        int id = scanner.nextInt();
+        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
+        songRepository.display(getSongFromList);
+    }
 
+    /**
+     * @param playlistId        -creating playlist id by getting it
+     * @param playlistName-     creating playlist name
+     * @param songId-creating   songid
+     * @param songName-creating songname
+     * @throws PlaylistNotFound-throws custom exception
+     * @return- if number of rows affected=1 then the playlist is created else not created
+     */
     public void createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
-        if(playlistName==null&&songId==0&&songName==null){
+        if (playlistName == null && songId == 0 && songName == null) {
             throw new PlaylistNotFound("Playlist not found");
 
         }
@@ -53,6 +80,10 @@ public class PlaylistRepository {
         }
     }
 
+    /**
+     * @return
+     * @param-
+     */
     public List<Song> displayPlaylist() {
         List<Song> playList = new ArrayList<>();
         String displayQuery = "SELECT * FROM `jukebox`.`playlist`;";
@@ -71,8 +102,15 @@ public class PlaylistRepository {
         }
         return playList;
     }
+
+    /**
+     * @param songId
+     * @param songList
+     * @return
+     * @throws PlaylistNotFound
+     */
     public List<Song> getSongFromplaylist(int songId, List<Song> songList) throws PlaylistNotFound {
-        if(songId==0&&songList==null){
+        if (songId == 0 && songList == null) {
             throw new PlaylistNotFound("Playlist not found");
         }
         List<Song> getSong = new ArrayList<>();
@@ -99,7 +137,14 @@ public class PlaylistRepository {
         return getSong;
     }
 
-
+    /**
+     * @param songId
+     * @param songName
+     * @param artistName
+     * @param genre
+     * @param duration
+     * @param songPath
+     */
     public void insertSongIntoplaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) {
         String insertQuery = "insert into `jukebox`.`song`(`songId`,`songName`,`artistName`,`genre`,`duration`,`songPath`) values (?,?,?,?,?,?);";
         int numberOfRowsAffected;
@@ -122,18 +167,6 @@ public class PlaylistRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
-        SongRepository songRepository=new SongRepository();
-        PlaylistRepository playlistRepository=new PlaylistRepository();
-        List<Song> displayplaylist = songRepository.displaySongList();
-        songRepository.display(displayplaylist);
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Enter the id");
-        int id=scanner.nextInt();
-        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
-        songRepository.display(getSongFromList);
     }
     }
 
