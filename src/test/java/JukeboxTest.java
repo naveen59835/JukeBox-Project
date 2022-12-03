@@ -17,6 +17,7 @@ class JukeboxTest {
     SongRepository songRepository;
     DatabaseConnectionService databaseConnectionService;
     MusicPlayerService musicPlayerService;
+    List<Song> songList;
 
     @BeforeEach
     void setUp() throws Exception, SongNotFound, PlaylistNotFound {
@@ -24,6 +25,7 @@ class JukeboxTest {
         songRepository = new SongRepository();
         databaseConnectionService = new DatabaseConnectionService();
         musicPlayerService = new MusicPlayerService();
+        songList = songRepository.displaySongList();
     }
 
     @AfterEach
@@ -35,6 +37,18 @@ class JukeboxTest {
     void createPlaylist() throws Exception, PlaylistNotFound, SongNotFound {
         List<Song> playlistList = playlistRepository.displayPlaylist();
         Assertions.assertEquals(9, playlistList.size());
+    }
 
+    @Test
+    void createPlaylistFail() throws Exception, PlaylistNotFound, SongNotFound {
+        List<Song> playlist = playlistRepository.displayPlaylist();
+        Assertions.assertNotEquals(10, playlist.size());
+
+    }
+
+    @Test
+    void getSongFromPlaylist() throws PlaylistNotFound {
+        List<Song> songList1 = playlistRepository.getSongFromplaylist(9, songList);
+        Assertions.assertEquals(1, songList1.size());
     }
 }
