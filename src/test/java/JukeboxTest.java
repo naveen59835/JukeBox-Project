@@ -51,4 +51,10 @@ class JukeboxTest {
         List<Song> songList1 = playlistRepository.getSongFromplaylist(9, songList);
         Assertions.assertEquals(1, songList1.size());
     }
+
+    @Test
+    void getSongFromPlaylistFail() throws PlaylistNotFound {
+        List<Song> songs = playlistRepository.getSongFromplaylist(9, songList);
+        Assertions.assertNotEquals(2, songs.size());
+    }
 }
