@@ -80,18 +80,6 @@ class JukeboxTest {
     }
 
     @Test
-    void songSearchByGenre() throws SongNotFound {
-        List<Song> songs = songRepository.songSearchByGenre(songList, "pop");
-        assertEquals(2, songs.size());
-    }
-
-    @Test
-    void songSearchByGenreFail() throws SongNotFound {
-        List<Song> songs = songRepository.songSearchByGenre(songList, "bass");
-        assertNotEquals(2, songs.size());
-    }
-
-    @Test
     void songSearchBySongName() throws SongNotFound {
         List<Song> songs = songRepository.songSearchBySongName(songList, "rolex1");
         assertEquals(1, songs.size());
@@ -125,5 +113,27 @@ class JukeboxTest {
         assertNotEquals(false, databaseConnectionService.printConnectionStatus());
     }
 
+    @Test
+    void searchSongByGenre() throws SongNotFound {
+        List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
+        assertEquals(2, songs.size());
+    }
 
+    @Test
+    void searchSongByGenreFail() throws SongNotFound {
+        List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
+        assertNotEquals(1, songs.size());
+    }
+
+    @Test
+    void sortSongs() {
+        List<Song> songs = songRepository.sortSongsBySongName(songList);
+        assertEquals(10, songs.size());
+    }
+
+    @Test
+    void sortSongsFail() {
+        List<Song> songs = songRepository.sortSongsBySongName(songList);
+        assertNotEquals(9, songs.size());
+    }
 }

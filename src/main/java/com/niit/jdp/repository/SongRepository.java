@@ -74,28 +74,13 @@ public class SongRepository implements Repository {
             }
         }
         return songList1;
-
     }
-    /**
-     * @param songList
-     * @param genre    parameter which gives song details
-     * @return return song details by getting genre as input
-     * @throws SongNotFound
-     */
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFound {
+        SongRepository songRepository = new SongRepository();
+        List<Song> songs = songRepository.displaySongList();
+        List<Song> songs1 = songRepository.songSearchByGenre(songs, "pop");
+        System.out.println(songs1);
 
-    @Override
-    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
-        if (songList == null) {
-            throw new SongNotFound("Song not found");
-        }
-        List<Song> songList2 = new ArrayList<>();
-        for (Song song : songList) {
-            if (song.getGenre().equals(genre)) {
-                songList.add(song);
-            }
-
-        }
-        return songList2;
     }
 
     /**
@@ -119,5 +104,27 @@ public class SongRepository implements Repository {
         for (Song song : songList) {
             System.out.format("%-10d %-30s %-20s %-20s %-30s\n", song.getSongId(), song.getSongName(), song.getArtistName(), song.getDuration(), song.getGenre());
         }
+    }
+
+    /**
+     * @param songList
+     * @param genre    parameter which gives song details
+     * @return return song details by getting genre as input
+     * @throws SongNotFound
+     */
+
+    @Override
+    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
+        if (songList == null) {
+            throw new SongNotFound("Song not found");
+        }
+        List<Song> songList2 = new ArrayList<>();
+        for (Song song : songList) {
+            if (song.getGenre().equals(genre)) {
+                songList2.add(song);
+            }
+
+        }
+        return songList2;
     }
 }

@@ -65,6 +65,6 @@ public class DatabaseConnectionService {
             System.err.println("Connection failed");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }
-        return connection == null;
+        return connection != null;
     }
 }

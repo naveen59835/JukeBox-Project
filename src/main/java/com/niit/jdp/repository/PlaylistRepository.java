@@ -125,15 +125,11 @@ public class PlaylistRepository {
                     }
                 }
             }
-            if (getSong == null) {
-                System.out.println("The following playlist is empty");
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return getSong;
     }
-
     /**
      * @param songId     insert song by using song id
      * @param songName   insert song by mnetioning song name
