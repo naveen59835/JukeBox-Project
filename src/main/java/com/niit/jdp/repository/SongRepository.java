@@ -98,6 +98,11 @@ public class SongRepository implements Repository {
         return songList2;
     }
 
+    /**
+     * @param songList get song list as parameter type
+     * @return returns song list by sorted order by name
+     */
+
     public List<Song> sortSongsBySongName(List<Song> songList) {
         Comparator<Song> comparator = (o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getSongName(), o2.getSongName());
         Collections.sort(songList, comparator);

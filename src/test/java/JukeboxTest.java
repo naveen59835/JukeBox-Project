@@ -125,8 +125,5 @@ class JukeboxTest {
         assertNotEquals(false, databaseConnectionService.printConnectionStatus());
     }
 
-    @Test
-    void insertSongIntoPlaylist() {
 
-    }
 }
