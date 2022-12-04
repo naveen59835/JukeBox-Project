@@ -47,20 +47,20 @@ public class Main {
                 System.out.println();
                 int task = 0;
                 do {
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
-                    System.out.println("Press 1 to search in playlist by genre or by name and Play It");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("Press 1 to Search in Playlist by Genre or by Name and Play It");
                     System.out.println("Press 2 to Play a Song");
-                    System.out.println("Press 3 to create play list");
-                    System.out.println("Press 4 to insert song into play List");
-                    System.out.println("Press 5 to display playlist");
-                    System.out.println("Press 6 to get song from SongList by id");
-                    System.out.println("Press 7 to display song list including path");
-                    System.out.println("Press 8 to randomly play a song");
-                    System.out.println("Press 9 to Exit the Application");
-
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("Press 3 to Create PlayList");
+                    System.out.println("Press 4 to Insert Song into PlayList");
+                    System.out.println("Press 5 to Display PlayList");
+                    System.out.println("Press 6 to get song from SongList by Id");
+                    System.out.println("Press 7 to Display SongList including Path");
+                    System.out.println("Press 8 to Shuffle Songs");
+                    System.out.println("Press 9 to Sort Songs By Song Name");
+                    System.out.println("Press 10 to Exit the Application");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     task = scanner.nextInt();
-                    System.out.println("=================================================");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println();
                     switch (task) {
                         case 1:
@@ -192,13 +192,22 @@ public class Main {
                             musicPlayerService.playSong(rand);
                             break;
                         case 9:
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("Sorted list of Song Name :");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                            List<Song> songs1 = songRepository.displaySongList();
+                            List<Song> songs2 = songRepository.sortSongsBySongName(songs1);
+                            System.out.println(songs2);
+                            break;
+                        case 10:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Exited the application");
                             System.out.println("************THANK YOU VISIT AGAIN**************");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                            break;
                     }
 
-                } while (task < 9);
+                } while (task < 10);
 
             } else {
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");

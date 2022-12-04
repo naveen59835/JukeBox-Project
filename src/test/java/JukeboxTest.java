@@ -124,4 +124,9 @@ class JukeboxTest {
     void printConnectionFail() {
         assertNotEquals(false, databaseConnectionService.printConnectionStatus());
     }
+
+    @Test
+    void insertSongIntoPlaylist() {
+
+    }
 }

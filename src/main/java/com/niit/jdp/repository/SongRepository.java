@@ -15,10 +15,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
 public class SongRepository implements Repository {
     Connection connection;
     DatabaseConnectionService databaseConnectionService;
+
     /**
      * @return get connection from the database connection service
      * @throws SQLException
@@ -93,6 +97,13 @@ public class SongRepository implements Repository {
         }
         return songList2;
     }
+
+    public List<Song> sortSongsBySongName(List<Song> songList) {
+        Comparator<Song> comparator = (o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getSongName(), o2.getSongName());
+        Collections.sort(songList, comparator);
+        return songList;
+    }
+
 
     /**
      * @param songList

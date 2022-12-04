@@ -113,7 +113,6 @@ public class PlaylistRepository {
         }
         List<Song> getSong = new ArrayList<>();
         String query = "Select * from song where songId = " + songId;
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
