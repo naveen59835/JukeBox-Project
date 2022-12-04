@@ -40,18 +40,31 @@ public class DatabaseConnectionService {
         return connection;
     }
 
+    public static void main(String[] args) {
+        DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
+        try {
+            databaseConnectionService.getConnectionToDatabase();
+            databaseConnectionService.printConnectionStatus();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @return print connection status
      */
-    public void printConnectionStatus() {
+    public Object printConnectionStatus() {
         if (connection != null) {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println("Connection is Successful");
+            System.out.println("\u001B[32m Connection is Successful\u001B[0m");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         } else {
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("Connection failed");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }
+        return connection == null;
     }
 }

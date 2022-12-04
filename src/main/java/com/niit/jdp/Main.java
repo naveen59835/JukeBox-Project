@@ -161,7 +161,7 @@ public class Main {
                             System.out.println("Enter the song path (Link)");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             String link = scanner.next();
-                            playlistRepository.insertSongIntoplaylist(songid1, songName, artist, genre, duration, link);
+                            playlistRepository.insertSongIntoPlaylist(songid1, songName, artist, genre, duration, link);
                             break;
                         case 5:
                             List<Song> songList = playlistRepository.displayPlaylist();

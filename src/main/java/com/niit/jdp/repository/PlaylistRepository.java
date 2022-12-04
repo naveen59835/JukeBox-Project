@@ -15,7 +15,7 @@ import com.niit.jdp.service.DatabaseConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Random;
 
 public class PlaylistRepository {
     Connection connection;
@@ -41,48 +41,22 @@ public class PlaylistRepository {
      * @throws PlaylistNotFound
      */
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
-        SongRepository songRepository = new SongRepository();
-        PlaylistRepository playlistRepository = new PlaylistRepository();
-        List<Song> displayplaylist = songRepository.displaySongList();
-        songRepository.display(displayplaylist);
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the id");
-        int id = scanner.nextInt();
-        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
-        songRepository.display(getSongFromList);
-    }
+//    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
+//        SongRepository songRepository = new SongRepository();
+//        PlaylistRepository playlistRepository = new PlaylistRepository();
+//        List<Song> displayplaylist = songRepository.displaySongList();
+//        songRepository.display(displayplaylist);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter the id");
+//        int id = scanner.nextInt();
+//        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
+//        songRepository.display(getSongFromList);
+//    }
 
-    /**
-     * @param playlistId   creating playlist id by getting it
-     * @param playlistName creating playlist name
-     * @param songId       creating songid
-     * @param songName     creating songname
-     * @return if number of rows affected=1 then the playlist is created else not created
-     * @throws PlaylistNotFound throws custom exception
-     */
-    public void createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
-        if (playlistName == null && songId == 0 && songName == null) {
-            throw new PlaylistNotFound("Playlist not found");
-
-        }
-        String insertQuery = "Insert into`jukebox`.`playlist`(playlistId,playlistName,songId,songName) Values (?, ?, ?,?);";
-        int numberOfRowsAffected;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, playlistId);
-            preparedStatement.setString(2, playlistName);
-            preparedStatement.setInt(3, songId);
-            preparedStatement.setString(4, songName);
-            numberOfRowsAffected = preparedStatement.executeUpdate();
-            if (numberOfRowsAffected == 1) {
-                System.out.println("Playlist successfully Created");
-            } else {
-                System.out.println("Playlist creation failed");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public static void main(String[] args) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(10);
+        System.out.println(randomIndex);
     }
 
     /**
@@ -108,7 +82,34 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param songId get song by songid
+     * @param playlistId   creating playlist id by getting it
+     * @param playlistName creating playlist name
+     * @param songId       creating songid
+     * @param songName     creating songname
+     * @return if number of rows affected=1 then the playlist is created else not created
+     * @throws PlaylistNotFound throws custom exception
+     */
+    public boolean createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
+        if (playlistName == null && songId == 0 && songName == null) {
+            throw new PlaylistNotFound("Playlist not found");
+        }
+        String insertQuery = "Insert into`jukebox`.`playlist`(playlistId,playlistName,songId,songName) Values (?, ?, ?,?);";
+        int numberOfRowsAffected;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(1, playlistId);
+            preparedStatement.setString(2, playlistName);
+            preparedStatement.setInt(3, songId);
+            preparedStatement.setString(4, songName);
+            numberOfRowsAffected = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return numberOfRowsAffected > 0;
+    }
+
+    /**
+     * @param songId        get song by songid
      * @param songList-from the song list
      * @return return song details by using only songID
      * @throws PlaylistNotFound
@@ -151,7 +152,7 @@ public class PlaylistRepository {
      * @return song successfully added if number of rows affected=1
      * @throws PlaylistNotFound
      */
-    public void insertSongIntoplaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) throws PlaylistNotFound {
+    public boolean insertSongIntoPlaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) throws PlaylistNotFound {
         if (songId == 0 && songName == null && artistName == null && genre == null && duration == null && songPath == null) {
             throw new PlaylistNotFound("Playlist not found");
         }
@@ -167,15 +168,10 @@ public class PlaylistRepository {
             preparedStatement.setString(6, songPath);
 
             numberOfRowsAffected = preparedStatement.executeUpdate();
-            if (numberOfRowsAffected == 1) {
-                System.out.println("song successfully added to the playlist");
-
-            } else {
-                System.out.println("Adding song failed");
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return numberOfRowsAffected > 0;
     }
-    }
+}
 

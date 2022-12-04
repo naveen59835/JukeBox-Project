@@ -16,12 +16,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class SongRepository implements Repository {
     Connection connection;
     DatabaseConnectionService databaseConnectionService;
-
     /**
      * @return get connection from the database connection service
      * @throws SQLException
@@ -30,9 +27,7 @@ public class SongRepository implements Repository {
     public SongRepository() throws SQLException, ClassNotFoundException {
         databaseConnectionService = new DatabaseConnectionService();
         connection = databaseConnectionService.getConnectionToDatabase();
-
     }
-
     /**
      * @return display song list
      * @throws SongNotFound
@@ -57,7 +52,6 @@ public class SongRepository implements Repository {
         }
         return songList;
     }
-
     /**
      * @param songList
      * @param songName search song by songName
@@ -78,7 +72,6 @@ public class SongRepository implements Repository {
         return songList1;
 
     }
-
     /**
      * @param songList
      * @param genre    parameter which gives song details
@@ -94,7 +87,7 @@ public class SongRepository implements Repository {
         List<Song> songList2 = new ArrayList<>();
         for (Song song : songList) {
             if (song.getGenre().equals(genre)) {
-                songList2.add(song);
+                songList.add(song);
             }
 
         }
