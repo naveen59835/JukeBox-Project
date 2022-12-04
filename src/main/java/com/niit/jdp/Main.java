@@ -55,7 +55,9 @@ public class Main {
                     System.out.println("Press 5 to display playlist");
                     System.out.println("Press 6 to get song from SongList by id");
                     System.out.println("Press 7 to display song list including path");
-                    System.out.println("Press 8 to Exit the Application");
+                    System.out.println("Press 8 to randomly play a song");
+                    System.out.println("Press 9 to Exit the Application");
+
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
                     task = scanner.nextInt();
                     System.out.println("=================================================");
@@ -180,9 +182,11 @@ public class Main {
                             List<Song> songs = songRepository.displaySongList();
                             System.out.println(songs);
                             break;
-
                         case 8:
                             songRepository.display(displayplaylist);
+                            System.out.println("++++++++++++++++++++++++++++++++");
+                            System.out.println("Randomly playing a song");
+                            System.out.println("++++++++++++++++++++++++++++++++");
                             Random random = new Random();
                             int rand = random.nextInt(10);
                             musicPlayerService.playSong(rand);
