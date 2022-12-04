@@ -15,7 +15,7 @@ import com.niit.jdp.service.DatabaseConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class PlaylistRepository {
     Connection connection;
@@ -41,22 +41,16 @@ public class PlaylistRepository {
      * @throws PlaylistNotFound
      */
 
-//    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
-//        SongRepository songRepository = new SongRepository();
-//        PlaylistRepository playlistRepository = new PlaylistRepository();
-//        List<Song> displayplaylist = songRepository.displaySongList();
-//        songRepository.display(displayplaylist);
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter the id");
-//        int id = scanner.nextInt();
-//        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
-//        songRepository.display(getSongFromList);
-//    }
-
-    public static void main(String[] args) {
-        Random random = new Random();
-        int randomIndex = random.nextInt(10);
-        System.out.println(randomIndex);
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, RuntimeException, SongNotFound, NullPointerException, PlaylistNotFound {
+        SongRepository songRepository = new SongRepository();
+        PlaylistRepository playlistRepository = new PlaylistRepository();
+        List<Song> displayplaylist = songRepository.displaySongList();
+        songRepository.display(displayplaylist);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the id");
+        int id = scanner.nextInt();
+        List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
+        songRepository.display(getSongFromList);
     }
 
     /**
@@ -80,7 +74,6 @@ public class PlaylistRepository {
         }
         return playList;
     }
-
     /**
      * @param playlistId   creating playlist id by getting it
      * @param playlistName creating playlist name

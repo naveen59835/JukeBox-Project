@@ -10,6 +10,7 @@ import com.niit.jdp.service.MusicPlayerService;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -179,14 +180,21 @@ public class Main {
                             List<Song> songs = songRepository.displaySongList();
                             System.out.println(songs);
                             break;
+
                         case 8:
+                            songRepository.display(displayplaylist);
+                            Random random = new Random();
+                            int rand = random.nextInt(10);
+                            musicPlayerService.playSong(rand);
+                            break;
+                        case 9:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Exited the application");
                             System.out.println("************THANK YOU VISIT AGAIN**************");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     }
 
-                } while (task < 8);
+                } while (task < 9);
 
             } else {
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
