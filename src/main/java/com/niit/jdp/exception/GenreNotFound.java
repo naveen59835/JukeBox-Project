@@ -6,5 +6,10 @@
 
 package com.niit.jdp.exception;
 
-public class GenreNotFound {
+public class GenreNotFound extends Exception {
+    public GenreNotFound(String message) {
+        super(message);
+
+    }
+
 }
