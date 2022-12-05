@@ -55,6 +55,9 @@ public class SongRepository implements Repository {
             if (song.getSongName().equals(songName)) {
                 songList1.add(song);
             }
+            if (songName != song.getSongName()) {
+                throw new SongNotFound("The specified Name not found");
+            }
         }
         return songList1;
     }
@@ -127,8 +130,12 @@ public class SongRepository implements Repository {
             if (song.getGenre().equals(genre)) {
                 songList2.add(song);
             }
+            if (genre != song.getGenre()) {
+                throw new SongNotFound("Genre Not found");
+            }
 
         }
+
         return songList2;
     }
 
