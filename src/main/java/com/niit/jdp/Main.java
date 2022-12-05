@@ -50,11 +50,11 @@ public class Main {
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("Press 1 to Search in Playlist by Genre or by Name and Play It");
                     System.out.println("Press 2 to Play a Song");
-                    System.out.println("Press 3 to Create PlayList");
-                    System.out.println("Press 4 to Insert Song into PlayList");
+                    System.out.println("Press 3 to Create PlayList");//
+                    System.out.println("Press 4 to Insert Song into PlayList");//
                     System.out.println("Press 5 to Display PlayList");
                     System.out.println("Press 6 to get song from SongList by Id");
-                    System.out.println("Press 7 to Display SongList");
+                    System.out.println("Press 7 to Display SongList");//
                     System.out.println("Press 8 to Shuffle Songs & Play A Random Song");
                     System.out.println("Press 9 to Sort Songs By Song Name");
                     System.out.println("Press 10 to Exit the Application");
