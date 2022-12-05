@@ -1,6 +1,4 @@
-import com.niit.jdp.exception.GenreNotFound;
 import com.niit.jdp.exception.PlaylistNotFound;
-import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.PlaylistRepository;

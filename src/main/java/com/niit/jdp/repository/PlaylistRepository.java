@@ -76,7 +76,6 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param playlistId   creating playlist id by getting it
      * @param playlistName creating playlist name
      * @param songId       creating songid
      * @param songName     creating songname
@@ -138,7 +137,6 @@ public class PlaylistRepository {
     }
 
     /**
-     * @param songId     insert song by using song id
      * @param songName   insert song by mnetioning song name
      * @param artistName insert song by mentioning artistname
      * @param genre      insert song using genre name

@@ -6,8 +6,6 @@
 
 package com.niit.jdp.repository;
 
-import com.niit.jdp.exception.GenreNotFound;
-import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseConnectionService;
@@ -42,7 +40,7 @@ public class SongRepository implements Repository {
      * @throws SongNotFound
      */
     @Override
-    public List<Song> songSearchBySongName(List<Song> songList, String songName) throws SongNotFound, SongNameNotFound {
+    public List<Song> songSearchBySongName(List<Song> songList, String songName) throws SongNotFound {
         if (songList == null) {
             throw new SongNotFound("The song not found");
         }
@@ -51,9 +49,7 @@ public class SongRepository implements Repository {
             if (song.getSongName().equals(songName)) {
                 songList1.add(song);
             }
-            if (songName != song.getSongName()) {
-                throw new SongNameNotFound("The specified Name not found");
-            }
+
         }
         return songList1;
     }
@@ -119,7 +115,7 @@ public class SongRepository implements Repository {
      */
 
     @Override
-    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound, GenreNotFound {
+    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
         if (songList == null) {
             throw new SongNotFound("Song not found");
         }
@@ -127,15 +123,9 @@ public class SongRepository implements Repository {
         for (Song song : songList) {
             if (song.getGenre().equals(genre)) {
                 songList2.add(song);
-
-            }
-            if (genre.equals(song.getGenre())) {
-                throw new GenreNotFound("Genre Not found");
             }
 
         }
-
         return songList2;
     }
-
 }

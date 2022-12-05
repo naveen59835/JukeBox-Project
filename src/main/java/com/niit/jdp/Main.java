@@ -1,8 +1,6 @@
 package com.niit.jdp;
 
-import com.niit.jdp.exception.GenreNotFound;
 import com.niit.jdp.exception.PlaylistNotFound;
-import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.PlaylistRepository;
@@ -110,7 +108,7 @@ public class Main {
                                     musicPlayerService.playSong(id);
                                     System.out.println();
                                 } else {
-                                    System.out.println("WrongCommand");
+                                    break;
                                 }
                             }
                             break;
@@ -134,14 +132,14 @@ public class Main {
                             }
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Please Note the playlist id is Auto Generated ");
-                            System.out.println("Insert only SongID you want to add (DO NOT REPEAT THE VALUES)");
+                            System.out.println("Insert other values and SongID you want to add (DO NOT REPEAT THE SONG ID)");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the playlist name you want to add");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             String playlistname = scanner.next();
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("Enter the song id you want to add");
+                            System.out.println("Enter the SONG ID you want to add");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             int songid = scanner.nextInt();
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -157,7 +155,7 @@ public class Main {
                             }
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Please Note the SONG ID is Auto Generated ");
-                            System.out.println("Insert only Other Details (DO NOT REPEAT THE VALUES)");
+                            System.out.println("Insert only Other Details");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Enter the song name");
@@ -250,8 +248,7 @@ public class Main {
                 System.out.println("Wrong user name or password please try again");
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             }
-        } catch (SQLException | ClassNotFoundException | SongNotFound | PlaylistNotFound | SongNameNotFound |
-                 GenreNotFound e) {
+        } catch (SQLException | ClassNotFoundException | SongNotFound | PlaylistNotFound e) {
             throw new RuntimeException(e);
         }
 
