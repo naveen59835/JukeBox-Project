@@ -221,7 +221,6 @@ public class Main {
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("The Sorted List of Songs are");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
                             List<Song> songs2 = songRepository.sortSongsBySongName(songs12);
                             for (Song song : songs2) {
                                 System.out.println(song);
