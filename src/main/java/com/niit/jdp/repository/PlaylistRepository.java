@@ -95,6 +95,11 @@ public class PlaylistRepository {
             preparedStatement.setInt(3, songId);
             preparedStatement.setString(4, songName);
             numberOfRowsAffected = preparedStatement.executeUpdate();
+            if (numberOfRowsAffected == 1) {
+                System.out.println("Successfully Created Playlist");
+            } else {
+                System.out.println("Playlist Creation Failed");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -156,6 +161,11 @@ public class PlaylistRepository {
             preparedStatement.setString(6, songPath);
 
             numberOfRowsAffected = preparedStatement.executeUpdate();
+            if (numberOfRowsAffected == 1) {
+                System.out.println("Song Successfully Inserted");
+            } else {
+                System.out.println("Song Insertion Failed");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

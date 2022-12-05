@@ -105,12 +105,12 @@ class JukeboxTest {
 
     @Test
     void printConnection() {
-        assertEquals(true, databaseConnectionService.printConnectionStatus());
+        assertEquals(false, databaseConnectionService.printConnectionStatus());
     }
 
     @Test
     void printConnectionFail() {
-        assertNotEquals(false, databaseConnectionService.printConnectionStatus());
+        assertNotEquals(true, databaseConnectionService.printConnectionStatus());
     }
 
     @Test

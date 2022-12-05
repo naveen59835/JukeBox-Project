@@ -28,11 +28,12 @@ public class Song {
         this.songPath = songPath;
     }
 
-    public Song(int playlistId2, String playlistName, int songId2, String genre) {
-    }
-
-    public Song(String songname) {
-
+    public Song(int songId, String songName, String artistName, String genre, String duration) {
+        this.songId = songId;
+        this.songName = songName;
+        this.artistName = artistName;
+        this.genre = genre;
+        this.duration = duration;
     }
 
     public int getSongId() {

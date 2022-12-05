@@ -54,8 +54,8 @@ public class Main {
                     System.out.println("Press 4 to Insert Song into PlayList");
                     System.out.println("Press 5 to Display PlayList");
                     System.out.println("Press 6 to get song from SongList by Id");
-                    System.out.println("Press 7 to Display SongList including Path");
-                    System.out.println("Press 8 to Shuffle Songs");
+                    System.out.println("Press 7 to Display SongList");
+                    System.out.println("Press 8 to Shuffle Songs & Play A Random Song");
                     System.out.println("Press 9 to Sort Songs By Song Name");
                     System.out.println("Press 10 to Exit the Application");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -119,7 +119,11 @@ public class Main {
                             System.out.println("Enter the choice of Songs you want to play 0 to Exit");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             int choice1 = scanner.nextInt();
+                            if (choice1 > displayplaylist.size()) {
+                                throw new SongNotFound("Incorrect ID entered Please Try Again");
+                            }
                             musicPlayerService.playSong(choice1);
+
                             break;
                         case 3:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -169,7 +173,9 @@ public class Main {
                             break;
                         case 5:
                             List<Song> songList = playlistRepository.displayPlaylist();
-                            System.out.println(songList);
+                            for (Song song : songList) {
+                                System.out.println(song);
+                            }
                             break;
                         case 6:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -181,7 +187,9 @@ public class Main {
                             break;
                         case 7:
                             List<Song> songs = songRepository.displaySongList();
-                            System.out.println(songs);
+                            for (Song song : songs) {
+                                System.out.println(song);
+                            }
                             break;
                         case 8:
                             songRepository.display(displayplaylist);
@@ -203,12 +211,16 @@ public class Main {
                         case 10:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("Exited the application");
+                            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("************THANK YOU VISIT AGAIN**************");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             break;
+                        default:
+                            System.out.println("Wrong Command Try again");
                     }
 
                 } while (task < 10);
+
 
             } else {
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");

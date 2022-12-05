@@ -32,29 +32,12 @@ public class SongRepository implements Repository {
         databaseConnectionService = new DatabaseConnectionService();
         connection = databaseConnectionService.getConnectionToDatabase();
     }
-    /**
-     * @return display song list
-     * @throws SongNotFound
-     */
-    @Override
-    public List<Song> displaySongList() throws SongNotFound {
-        List<Song> songList = new ArrayList<>();
-        String displayQuery = "Select * from `jukebox`.`song`;";
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(displayQuery)) {
-            while (resultSet.next()) {
-                int songId = resultSet.getInt("songId");
-                String songName = resultSet.getString("songName");
-                String artistName = resultSet.getString("artistName");
-                String genre = resultSet.getString("genre");
-                String duration = resultSet.getString("duration");
-                String songPath = resultSet.getString("songPath");
-                songList.add(new Song(songId, songName, artistName, genre, duration, songPath));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFound {
+        SongRepository songRepository = new SongRepository();
+        List<Song> songs = songRepository.displaySongList();
+        for (Song song : songs) {
+            System.out.println(song);
         }
-        return songList;
     }
     /**
      * @param songList
@@ -75,12 +58,33 @@ public class SongRepository implements Repository {
         }
         return songList1;
     }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFound {
-        SongRepository songRepository = new SongRepository();
-        List<Song> songs = songRepository.displaySongList();
-        List<Song> songs1 = songRepository.songSearchByGenre(songs, "pop");
-        System.out.println(songs1);
 
+    /**
+     * @return display song list
+     * @throws SongNotFound
+     */
+    @Override
+    public List<Song> displaySongList() throws SongNotFound {
+        List<Song> songList = new ArrayList<>();
+        if (songList == null) {
+            throw new SongNotFound("The values is null");
+        }
+        String displayQuery = "Select `songId`,`songName`,`artistName`,`genre`,`duration` from `jukebox`.`song`;";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(displayQuery)) {
+            while (resultSet.next()) {
+                int songId = resultSet.getInt(1);
+                String songName = resultSet.getString(2);
+                String artistName = resultSet.getString(3);
+                String genre = resultSet.getString(4);
+                String duration = resultSet.getString(5);
+                Song song = new Song(songId, songName, artistName, genre, duration);
+                songList.add(song);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return songList;
     }
 
     /**
@@ -127,4 +131,5 @@ public class SongRepository implements Repository {
         }
         return songList2;
     }
+
 }
