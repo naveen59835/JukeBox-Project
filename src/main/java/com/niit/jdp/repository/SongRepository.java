@@ -6,6 +6,8 @@
 
 package com.niit.jdp.repository;
 
+import com.niit.jdp.exception.GenreNotFound;
+import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseConnectionService;
@@ -32,13 +34,7 @@ public class SongRepository implements Repository {
         databaseConnectionService = new DatabaseConnectionService();
         connection = databaseConnectionService.getConnectionToDatabase();
     }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFound {
-        SongRepository songRepository = new SongRepository();
-        List<Song> songs = songRepository.displaySongList();
-        for (Song song : songs) {
-            System.out.println(song);
-        }
-    }
+
     /**
      * @param songList
      * @param songName search song by songName
@@ -46,7 +42,7 @@ public class SongRepository implements Repository {
      * @throws SongNotFound
      */
     @Override
-    public List<Song> songSearchBySongName(List<Song> songList, String songName) throws SongNotFound {
+    public List<Song> songSearchBySongName(List<Song> songList, String songName) throws SongNotFound, SongNameNotFound {
         if (songList == null) {
             throw new SongNotFound("The song not found");
         }
@@ -55,8 +51,8 @@ public class SongRepository implements Repository {
             if (song.getSongName().equals(songName)) {
                 songList1.add(song);
             }
-            if (songName == song.getSongName()) {
-                throw new SongNotFound("The specified Name not found");
+            if (songName != song.getSongName()) {
+                throw new SongNameNotFound("The specified Name not found");
             }
         }
         return songList1;
@@ -123,7 +119,7 @@ public class SongRepository implements Repository {
      */
 
     @Override
-    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
+    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound, GenreNotFound {
         if (songList == null) {
             throw new SongNotFound("Song not found");
         }
@@ -131,9 +127,10 @@ public class SongRepository implements Repository {
         for (Song song : songList) {
             if (song.getGenre().equals(genre)) {
                 songList2.add(song);
+
             }
-            if (genre == song.getGenre()) {
-                throw new SongNotFound("Genre Not found");
+            if (genre.equals(song.getGenre())) {
+                throw new GenreNotFound("Genre Not found");
             }
 
         }

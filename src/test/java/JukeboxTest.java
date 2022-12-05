@@ -1,4 +1,6 @@
+import com.niit.jdp.exception.GenreNotFound;
 import com.niit.jdp.exception.PlaylistNotFound;
+import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.PlaylistRepository;
@@ -80,13 +82,13 @@ class JukeboxTest {
     }
 
     @Test
-    void songSearchBySongName() throws SongNotFound {
+    void songSearchBySongName() throws SongNotFound, SongNameNotFound {
         List<Song> songs = songRepository.songSearchBySongName(songList, "rolex1");
         assertEquals(1, songs.size());
     }
 
     @Test
-    void songSearchBySongNameFail() throws SongNotFound {
+    void songSearchBySongNameFail() throws SongNotFound, SongNameNotFound {
         List<Song> songs = songRepository.songSearchBySongName(songList, "rolex1");
         assertNotEquals(2, songs.size());
     }
@@ -114,13 +116,13 @@ class JukeboxTest {
     }
 
     @Test
-    void searchSongByGenre() throws SongNotFound {
+    void searchSongByGenre() throws SongNotFound, GenreNotFound {
         List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
         assertEquals(2, songs.size());
     }
 
     @Test
-    void searchSongByGenreFail() throws SongNotFound {
+    void searchSongByGenreFail() throws SongNotFound, GenreNotFound {
         List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
         assertNotEquals(1, songs.size());
     }

@@ -1,6 +1,8 @@
 package com.niit.jdp;
 
+import com.niit.jdp.exception.GenreNotFound;
 import com.niit.jdp.exception.PlaylistNotFound;
+import com.niit.jdp.exception.SongNameNotFound;
 import com.niit.jdp.exception.SongNotFound;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.PlaylistRepository;
@@ -108,7 +110,7 @@ public class Main {
                                     musicPlayerService.playSong(id);
                                     System.out.println();
                                 } else {
-                                    break;
+                                    System.out.println("WrongCommand");
                                 }
                             }
                             break;
@@ -248,7 +250,8 @@ public class Main {
                 System.out.println("Wrong user name or password please try again");
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             }
-        } catch (SQLException | ClassNotFoundException | SongNotFound | PlaylistNotFound e) {
+        } catch (SQLException | ClassNotFoundException | SongNotFound | PlaylistNotFound | SongNameNotFound |
+                 GenreNotFound e) {
             throw new RuntimeException(e);
         }
 
