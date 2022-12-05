@@ -74,6 +74,7 @@ public class PlaylistRepository {
         }
         return playList;
     }
+
     /**
      * @param playlistId   creating playlist id by getting it
      * @param playlistName creating playlist name
@@ -82,18 +83,17 @@ public class PlaylistRepository {
      * @return if number of rows affected=1 then the playlist is created else not created
      * @throws PlaylistNotFound throws custom exception
      */
-    public boolean createPlaylist(int playlistId, String playlistName, int songId, String songName) throws PlaylistNotFound {
+    public boolean createPlaylist(String playlistName, int songId, String songName) throws PlaylistNotFound {
         if (playlistName == null && songId == 0 && songName == null) {
             throw new PlaylistNotFound("Playlist not found");
         }
-        String insertQuery = "Insert into`jukebox`.`playlist`(playlistId,playlistName,songId,songName) Values (?, ?, ?,?);";
+        String insertQuery = "Insert into`jukebox`.`playlist`(playlistName,songId,songName) Values (?, ?,?);";
         int numberOfRowsAffected;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, playlistId);
-            preparedStatement.setString(2, playlistName);
-            preparedStatement.setInt(3, songId);
-            preparedStatement.setString(4, songName);
+            preparedStatement.setString(1, playlistName);
+            preparedStatement.setInt(2, songId);
+            preparedStatement.setString(3, songName);
             numberOfRowsAffected = preparedStatement.executeUpdate();
             if (numberOfRowsAffected == 1) {
                 System.out.println("Successfully Created Playlist");
@@ -134,7 +134,9 @@ public class PlaylistRepository {
             throw new RuntimeException(e);
         }
         return getSong;
+
     }
+
     /**
      * @param songId     insert song by using song id
      * @param songName   insert song by mnetioning song name
@@ -145,20 +147,19 @@ public class PlaylistRepository {
      * @return song successfully added if number of rows affected=1
      * @throws PlaylistNotFound
      */
-    public boolean insertSongIntoPlaylist(int songId, String songName, String artistName, String genre, String duration, String songPath) throws PlaylistNotFound {
-        if (songId == 0 && songName == null && artistName == null && genre == null && duration == null && songPath == null) {
+    public boolean insertSongIntoPlaylist(String songName, String artistName, String genre, String duration, String songPath) throws PlaylistNotFound {
+        if (songName == null && artistName == null && genre == null && duration == null && songPath == null) {
             throw new PlaylistNotFound("Playlist not found");
         }
-        String insertQuery = "insert into `jukebox`.`song`(`songId`,`songName`,`artistName`,`genre`,`duration`,`songPath`) values (?,?,?,?,?,?);";
+        String insertQuery = "insert into `jukebox`.`song`(`songName`,`artistName`,`genre`,`duration`,`songPath`) values (?,?,?,?,?);";
         int numberOfRowsAffected;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, songId);
-            preparedStatement.setString(2, songName);
-            preparedStatement.setString(3, artistName);
-            preparedStatement.setString(4, genre);
-            preparedStatement.setString(5, duration);
-            preparedStatement.setString(6, songPath);
+            preparedStatement.setString(1, songName);
+            preparedStatement.setString(2, artistName);
+            preparedStatement.setString(3, genre);
+            preparedStatement.setString(4, duration);
+            preparedStatement.setString(5, songPath);
 
             numberOfRowsAffected = preparedStatement.executeUpdate();
             if (numberOfRowsAffected == 1) {

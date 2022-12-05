@@ -99,7 +99,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return String.format("%-10s %-30s %-20s %-20s %-20s %-30s\n",songId,songName,artistName,genre,duration,songPath);
+        return String.format("%-10s %-30s %-20s %-20s %-30s\n", songId, songName, artistName, genre, duration);
     }
 }
 

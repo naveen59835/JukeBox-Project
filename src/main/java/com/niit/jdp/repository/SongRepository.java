@@ -55,7 +55,7 @@ public class SongRepository implements Repository {
             if (song.getSongName().equals(songName)) {
                 songList1.add(song);
             }
-            if (songName != song.getSongName()) {
+            if (songName == song.getSongName()) {
                 throw new SongNotFound("The specified Name not found");
             }
         }
@@ -107,7 +107,9 @@ public class SongRepository implements Repository {
      * @return displays the song list in the below specified format (tabular format)
      */
     public void display(List<Song> songList) {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("The details of the songs are");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
         for (Song song : songList) {
             System.out.format("%-10d %-30s %-20s %-20s %-30s\n", song.getSongId(), song.getSongName(), song.getArtistName(), song.getDuration(), song.getGenre());
         }
@@ -130,7 +132,7 @@ public class SongRepository implements Repository {
             if (song.getGenre().equals(genre)) {
                 songList2.add(song);
             }
-            if (genre != song.getGenre()) {
+            if (genre == song.getGenre()) {
                 throw new SongNotFound("Genre Not found");
             }
 
