@@ -207,6 +207,7 @@ public class Main {
                             Random random = new Random();
                             int rand = random.nextInt(10);
                             System.out.println("Now Playing SONG ID =" + rand);
+                            System.out.println("Now Playing");
                             List<Song> songFromplaylist = playlistRepository.getSongFromplaylist(rand, displayplaylist);
                             songRepository.display(songFromplaylist);
                             musicPlayerService.playSong(rand);
