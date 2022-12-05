@@ -65,8 +65,7 @@ public class SongRepository implements Repository {
             throw new SongNotFound("The values is null");
         }
         String displayQuery = "Select `songId`,`songName`,`artistName`,`genre`,`duration` from `jukebox`.`song`;";
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(displayQuery)) {
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(displayQuery)) {
             while (resultSet.next()) {
                 int songId = resultSet.getInt(1);
                 String songName = resultSet.getString(2);
@@ -115,17 +114,17 @@ public class SongRepository implements Repository {
      */
 
     @Override
-    public List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
+    public Song songSearchByGenre(List<Song> songList, String genre) throws SongNotFound {
         if (songList == null) {
             throw new SongNotFound("Song not found");
         }
-        List<Song> songList2 = new ArrayList<>();
-        for (Song song : songList) {
-            if (song.getGenre().equals(genre)) {
-                songList2.add(song);
+        //List<Song> songList2 = new ArrayList<>();
+        Song song = new Song();
+        for (Song song1 : songList) {
+            if (song1.getGenre().equals(genre)) {
+                song = song1;
             }
-
         }
-        return songList2;
+        return song;
     }
 }

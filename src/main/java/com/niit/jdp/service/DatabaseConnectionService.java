@@ -20,6 +20,18 @@ public class DatabaseConnectionService {
         connection = null;
     }
 
+    public static void main(String[] args) {
+        DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
+        try {
+            databaseConnectionService.getConnectionToDatabase();
+            databaseConnectionService.printConnectionStatus();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @return load the driver
      * @throws ClassNotFoundException
@@ -38,18 +50,6 @@ public class DatabaseConnectionService {
     public Connection getConnectionToDatabase() throws SQLException, ClassNotFoundException {
         getConnection();
         return connection;
-    }
-
-    public static void main(String[] args) {
-        DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
-        try {
-            databaseConnectionService.getConnectionToDatabase();
-            databaseConnectionService.printConnectionStatus();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

@@ -37,25 +37,25 @@ public class MusicPlayerService {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 File file = new File(resultSet.getString("songPath"));
-                AudioInputStream audioInputStream= AudioSystem.getAudioInputStream(file);
-                Clip clip=AudioSystem.getClip();
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+                Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
-                int userInput=0;
-                do{
+                int userInput = 0;
+                do {
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("press 1 to start|| 2 to pause ||3 to resume||0 to close music player");
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                    userInput=scanner.nextInt();
+                    userInput = scanner.nextInt();
                     scanner.nextLine();
-                    switch (userInput){
+                    switch (userInput) {
                         case (1):
                             clip.start();
                             break;
                         case (2):
                             clip.stop();
                             break;
-                        case(3):
+                        case (3):
                             clip.loop(1);
                             break;
                         case (0):
@@ -67,7 +67,7 @@ public class MusicPlayerService {
                             System.out.println("Incorrect Input please try again");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     }
-                    }while (userInput>0);
+                } while (userInput > 0);
             }
 
         } catch (Exception e) {

@@ -72,8 +72,13 @@ public class Main {
                                 System.out.println("Enter the Genre");
                                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
                                 String genre = scanner.next();
-                                List<Song> getGenre = songRepository.songSearchByGenre(displayplaylist, genre);
-                                songRepository.display(getGenre);
+                                Song getGenre = songRepository.songSearchByGenre(displayplaylist, genre);
+                                if (!genre.equals(getGenre.getGenre())) {
+                                    System.out.println("The Genre Not Found");
+                                } else {
+                                    System.out.println(getGenre);
+                                }
+
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                 System.out.println("If you want to play any song please press 1 or press 2 to exit");
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -116,14 +121,22 @@ public class Main {
                         case 2:
                             songRepository.display(displayplaylist);
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("Enter the choice of Songs you want to play 0 to Exit");
+                            System.out.println("If you want to Play a Song press 1 or O to Exit");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            int choice1 = scanner.nextInt();
-                            if (choice1 > displayplaylist.size()) {
-                                throw new SongNotFound("Incorrect ID entered Please Try Again");
+                            int choice3 = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (choice3) {
+                                case 1:
+                                    System.out.println("Choose From the Menu");
+                                    int Id = scanner.nextInt();
+                                    musicPlayerService.playSong(Id);
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    System.out.println("Invalid Option Please Try Again");
+                                    break;
                             }
-                            musicPlayerService.playSong(choice1);
-
                             break;
                         case 3:
                             List<Song> songList = playlistRepository.displayPlaylist();

@@ -24,7 +24,7 @@ class JukeboxTest {
     List<Song> songList;
 
     @BeforeEach
-    void setUp() throws Exception, SongNotFound, PlaylistNotFound {
+    void setUp() throws Exception {
         playlistRepository = new PlaylistRepository();
         songRepository = new SongRepository();
         databaseConnectionService = new DatabaseConnectionService();
@@ -38,7 +38,7 @@ class JukeboxTest {
     }
 
     @AfterEach
-    void tearDown() throws Exception, SongNotFound, PlaylistNotFound {
+    void tearDown() throws Exception {
         databaseConnectionService = null;
 
     }
@@ -58,7 +58,7 @@ class JukeboxTest {
     @Test
     void displayPlaylist() {
         List<Song> songList2 = playlistRepository.displayPlaylist();
-        Assertions.assertEquals(9, songList2.size());
+        Assertions.assertEquals(10, songList2.size());
     }
 
     @Test
@@ -80,13 +80,13 @@ class JukeboxTest {
     }
 
     @Test
-    void songSearchBySongName() throws SongNotFound, SongNameNotFound {
+    void songSearchBySongName() throws SongNotFound {
         List<Song> songs = songRepository.songSearchBySongName(songList, "rolex1");
         assertEquals(1, songs.size());
     }
 
     @Test
-    void songSearchBySongNameFail() throws SongNotFound, SongNameNotFound {
+    void songSearchBySongNameFail() throws SongNotFound {
         List<Song> songs = songRepository.songSearchBySongName(songList, "rolex1");
         assertNotEquals(2, songs.size());
     }
@@ -114,15 +114,15 @@ class JukeboxTest {
     }
 
     @Test
-    void searchSongByGenre() throws SongNotFound, GenreNotFound {
-        List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
-        assertEquals(2, songs.size());
+    void searchSongByGenre() throws SongNotFound {
+        Song songs = songRepository.songSearchByGenre(songList, "solo");
+        assertEquals(6, songs.getSongId());
     }
 
     @Test
-    void searchSongByGenreFail() throws SongNotFound, GenreNotFound {
-        List<Song> songs = songRepository.songSearchByGenre(songList, "solo");
-        assertNotEquals(1, songs.size());
+    void searchSongByGenreFail() throws SongNotFound {
+        Song songs = songRepository.songSearchByGenre(songList, "solo");
+        assertNotEquals(1, songs.getSongId());
     }
 
     @Test

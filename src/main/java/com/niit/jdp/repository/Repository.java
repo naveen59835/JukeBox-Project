@@ -30,5 +30,5 @@ public interface Repository {
      * @throws SongNotFound
      */
 
-    List<Song> songSearchByGenre(List<Song> songList, String genre) throws SongNotFound;
+    Song songSearchByGenre(List<Song> songList, String genre) throws SongNotFound;
 }

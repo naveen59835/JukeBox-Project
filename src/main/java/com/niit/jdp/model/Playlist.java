@@ -71,9 +71,8 @@ public class Playlist extends Song {
 
     @Override
     public String toString() {
-        return String.format("%-10s %-30s %-20s %-10s\n",playlistId,playlistName,songId,songName);
+        return String.format("%-10s %-30s %-20s %-10s\n", playlistId, playlistName, songId, songName);
     }
-
 
 
 }
