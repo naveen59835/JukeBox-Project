@@ -118,7 +118,6 @@ public class SongRepository implements Repository {
         if (songList == null) {
             throw new SongNotFound("Song not found");
         }
-        //List<Song> songList2 = new ArrayList<>();
         Song song = new Song();
         for (Song song1 : songList) {
             if (song1.getGenre().equals(genre)) {

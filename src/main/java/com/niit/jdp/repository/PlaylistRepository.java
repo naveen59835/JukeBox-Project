@@ -122,7 +122,6 @@ public class PlaylistRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int songId1 = resultSet.getInt("songId");
-                String songName = resultSet.getString("songName");
                 for (Song song : songList) {
                     if (songId1 == song.getSongId()) {
                         getSong.add(song);
