@@ -15,7 +15,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         try {
             DatabaseConnectionService databaseConnectionService = new DatabaseConnectionService();
             PlaylistRepository playlistRepository = new PlaylistRepository();
@@ -74,7 +73,7 @@ public class Main {
                                 String genre = scanner.next();
                                 Song getGenre = songRepository.songSearchByGenre(displayplaylist, genre);
                                 if (!genre.equals(getGenre.getGenre())) {
-                                    System.out.println("The Genre Not Found");
+                                    System.err.println("The Genre Not Found Please Try Again");
                                 } else {
                                     System.out.println(getGenre);
                                 }
@@ -200,7 +199,7 @@ public class Main {
                             break;
                         case 6:
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("Enter the id");
+                            System.out.println("Enter the Song ID");
                             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             int id = scanner.nextInt();
                             List<Song> getSongFromList = playlistRepository.getSongFromplaylist(id, displayplaylist);
@@ -220,7 +219,7 @@ public class Main {
                             Random random = new Random();
                             int rand = random.nextInt(10);
                             System.out.println("Now Playing SONG ID =" + rand);
-                            System.out.println("Now Playing");
+                            System.out.println("Now Playing :-");
                             List<Song> songFromplaylist = playlistRepository.getSongFromplaylist(rand, displayplaylist);
                             songRepository.display(songFromplaylist);
                             musicPlayerService.playSong(rand);
