@@ -79,12 +79,12 @@ public class Main {
                                 }
 
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                System.out.println("If you want to play any song please press 1 or press 2 to exit");
+                                System.out.println("If you want to play any Song please press 1 or press 2 to exit");
                                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                 String option = scanner.next();
                                 if (option.equals("1")) {
                                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                    System.out.println("please enter the song id which you want play");
+                                    System.out.println("please enter the song ID which you want play");
                                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                     int id = scanner.nextInt();
                                     musicPlayerService.playSong(id);
